@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Kreiraj Order</title>
+</head>
+<body>
+  <h1>Kreiraj Order</h1>
+  <form action="/create-order" method="post">
+    <label for="type">Type (fixed/float):</label>
+    <input type="text" id="type" name="type" required value="float"><br><br>
+
+    <label for="fromCcy">From Currency (npr. BTC):</label>
+    <input type="text" id="fromCcy" name="fromCcy" required><br><br>
+
+    <label for="toCcy">To Currency (npr. USDTTRC):</label>
+    <input type="text" id="toCcy" name="toCcy" required><br><br>
+
+    <label for="direction">Direction (from/to):</label>
+    <input type="text" id="direction" name="direction" required value="from"><br><br>
+
+    <label for="amount">Amount:</label>
+    <input type="number" step="any" id="amount" name="amount" required><br><br>
+
+    <label for="toAddress">To Address:</label>
+    <input type="text" id="toAddress" name="toAddress" required><br><br>
+
+    <label for="tag">Tag (opciono):</label>
+    <input type="text" id="tag" name="tag"><br><br>
+
+    <label for="refcode">Affiliate Code (opciono):</label>
+    <input type="text" id="refcode" name="refcode"><br><br>
+
+    <label for="afftax">AffTax (opciono):</label>
+    <input type="text" id="afftax" name="afftax"><br><br>
+
+    <button type="submit">Kreiraj Order</button>
+  </form>
+  <br>
+
+  <% if (result) { %>
+    <% if (result.code === 0) { %>
+      <h2>Detalji Order-a</h2>
+      <p><strong>Order ID:</strong> <%= result.data.id %></p>
+      <hr>
+      <h3>Šalji BTC</h3>
+      <p><strong>Iznos:</strong> <%= result.data.from.amount %> BTC</p>
+      <p><strong>Adresa za uplatu:</strong> <%= result.data.from.address %></p>
+      <hr>
+      <h3>Primaj USDT</h3>
+      <p><strong>Iznos:</strong> <%= result.data.to.amount %> USDT</p>
+      <p><strong>Adresa za prijem:</strong> <%= result.data.to.address %></p>
+      <hr>
+      <!-- Opcionalno: prikaži token ukoliko je potreban -->
+      <p><strong>Token:</strong> <%= result.data.token %></p>
+    <% } else { %>
+      <p>Greška pri kreiranju order-a ili neispravan odgovor:</p>
+      <pre><%= JSON.stringify(result, null, 2) %></pre>
+    <% } %>
+  <% } %>
+  
+  <br>
+  <a href="/create-order">Nazad</a>
+</body>
+</html>

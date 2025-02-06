@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Exchange Price</title>
+</head>
+<body>
+  <h1>Dohvati Exchange Price</h1>
+  <form action="/price" method="post">
+    <label for="type">Type (fixed/float):</label>
+    <input type="text" id="type" name="type" required value="float"><br><br>
+
+    <label for="fromCcy">From Currency (npr. BTC):</label>
+    <input type="text" id="fromCcy" name="fromCcy" required><br><br>
+
+    <label for="toCcy">To Currency (npr. USDTTRC):</label>
+    <input type="text" id="toCcy" name="toCcy" required><br><br>
+
+    <label for="amount">Amount:</label>
+    <input type="number" step="any" id="amount" name="amount" required><br><br>
+
+    <label for="direction">Direction (from/to):</label>
+    <input type="text" id="direction" name="direction" required value="from"><br><br>
+
+    <label for="ccies">Include ccies? (true/false):</label>
+    <input type="text" id="ccies" name="ccies"><br><br>
+
+    <label for="usd">Include usd? (true/false):</label>
+    <input type="text" id="usd" name="usd"><br><br>
+
+    <label for="refcode">Affiliate Code (opciono):</label>
+    <input type="text" id="refcode" name="refcode"><br><br>
+
+    <label for="afftax">AffTax (opciono):</label>
+    <input type="text" id="afftax" name="afftax"><br><br>
+
+    <button type="submit">Dohvati Price</button>
+  </form>
+  <br>
+  <% if (typeof result !== 'undefined') { %>
+    <h2>Rezultat:</h2>
+    <pre><%= JSON.stringify(result, null, 2) %></pre>
+  <% } %>
+  <br>
+  <a href="/">Nazad</a>
+</body>
+</html>
